@@ -6,7 +6,7 @@ import {
   Maximize,
   Minimize,
   Settings,
-  Triangle
+  Command
 } from 'react-feather';
 import DashHeader, { Notification } from './styles/Header';
 
@@ -32,12 +32,12 @@ const MainHeader = () => {
             <BarChart size={20} strokeWidth={1} />
           </a>
         )}
-        {/* <Link href="/">
+        <Link href="/">
           <a className="brand">
-            <Triangle size={24} strokeWidth={1} />
-            <strong className="mx-1 text-black">{state.name}</strong>
+            <Command size={50} strokeWidth={1} />
+            <strong className="mx-1 text-black">LinkSave</strong>
           </a>
-        </Link> */}
+        </Link>
 
         <Menu mode="horizontal" className="menu-divider">
           {!state.mobile && (
@@ -99,7 +99,7 @@ const MainHeader = () => {
           </Menu.Item>
           <SubMenu
             title={
-              <Badge count={5}>
+              <Badge count={1}>
                 <span className="submenu-title-wrapper">
                   <Bell size={20} strokeWidth={1} />
                 </span>
@@ -110,7 +110,7 @@ const MainHeader = () => {
               className="p-0 bg-transparent"
               style={{ height: 'auto' }}
             >
-              <List
+              {/* <List
                 className="header-notifications"
                 itemLayout="horizontal"
                 dataSource={notifications}
@@ -126,17 +126,17 @@ const MainHeader = () => {
                     </List.Item>
                   </Notification>
                 )}
-              />
+              /> */}
             </Menu.Item>
           </SubMenu>
 
-          <SubMenu title={<Avatar src="" />}>
+          <SubMenu title={<Avatar src="">TJ</Avatar>}>
             <Menu.Item>Settings</Menu.Item>
             <Menu.Item>Profile</Menu.Item>
             <Menu.Item>Notifications</Menu.Item>
             <Menu.Divider />
             <Menu.Item>
-              <Link href="https://one-readme.fusepx.com">
+              <Link href="">
                 <a>Help?</a>
               </Link>
             </Menu.Item>

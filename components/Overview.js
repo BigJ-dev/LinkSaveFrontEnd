@@ -121,7 +121,7 @@ const Overview = (props) => {
       Axios.delete(`http://localhost:8080/api/link/user/deleteUserLink/${linkId}`)
       .then(res=>{
         if(res.data !=null){
-           alert(`The siteLink: ${siteName} has been deleted`)
+          //  alert(`The siteLink: ${siteName} has been deleted`)
         }
       })
       Router.replace(Router.asPath);

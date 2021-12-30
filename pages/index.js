@@ -19,7 +19,7 @@ export async function getStaticProps() {
   //debugger
   return {
     props: {
-      userLinks: data
+      data: data
     }
   }
 }

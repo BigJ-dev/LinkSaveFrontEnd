@@ -32,12 +32,12 @@ const MainHeader = () => {
             <BarChart size={20} strokeWidth={1} />
           </a>
         )}
-        <Link href="/">
+        {/* <Link href="/">
           <a className="brand">
             <Triangle size={24} strokeWidth={1} />
             <strong className="mx-1 text-black">{state.name}</strong>
           </a>
-        </Link>
+        </Link> */}
 
         <Menu mode="horizontal" className="menu-divider">
           {!state.mobile && (
@@ -130,7 +130,7 @@ const MainHeader = () => {
             </Menu.Item>
           </SubMenu>
 
-          <SubMenu title={<Avatar src="/static/images/avatar.jpg" />}>
+          <SubMenu title={<Avatar src="" />}>
             <Menu.Item>Settings</Menu.Item>
             <Menu.Item>Profile</Menu.Item>
             <Menu.Item>Notifications</Menu.Item>

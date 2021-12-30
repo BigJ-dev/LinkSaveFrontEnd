@@ -2,14 +2,10 @@ import {
   Archive,
   Edit,
   MoreHorizontal,
-  PhoneCall,
-  Trash2,
   Printer,
   Save,
   Trash,
-  Link,
-  TrendingDown,
-  TrendingUp
+  Link
 } from 'react-feather';
 import {
   Card,
@@ -75,7 +71,7 @@ const Overview = (props) => {
      siteName: "",
      siteUrl: ""
   })
-
+  
   function submit(e){
     Axios.post(url,{
       siteName: data.siteName,
@@ -87,15 +83,49 @@ const Overview = (props) => {
     Router.replace(Router.asPath);
   }
 
-  function deleteUserLink(linkId){
-    Axios.delete(`http://localhost:8080/api/link/user/deleteUserLink/${linkId}`)
-    .then(res=>{
-      if(res.data !=null){
-         alert("site link deleted")
-      }
-      // console.log("deleted", res.data).catch(err => console.log(err))
-    })
-    Router.replace(Router.asPath);
+  function updateUserLink(){
+    if(data.id != null){
+      Axios.put(`http://localhost:8080/api/link/user/updateUserLink/${data.id}`,{
+        siteName: data.siteName,
+        siteUrl: data.siteUrl
+      })
+      .then(res=>{
+        setData(res.data)
+        console.log(res.data)
+      })
+      Router.replace(Router.asPath);
+    }else{
+      alert("Please select the link you want to edit")
+    }
+ 
+  }
+
+  function clearInput(){
+    setData('')
+  }
+
+  function getUserLinkAndSetOnInput(userLink){
+      Axios.get(`http://localhost:8080/api/link/user/getUserLink/${userLink.id}`)
+      .then(res=>{
+        if(res.data !=null){
+          console.log(userLink.id)
+          const newdata={...data}
+          setData(userLink)
+          console.log(userLink)
+        }
+      })
+  }
+
+  function deleteUserLink(linkId,siteName){
+    if (window.confirm(`Delete the item "${siteName}" ?`)) {
+      Axios.delete(`http://localhost:8080/api/link/user/deleteUserLink/${linkId}`)
+      .then(res=>{
+        if(res.data !=null){
+           alert(`The siteLink: ${siteName} has been deleted`)
+        }
+      })
+      Router.replace(Router.asPath);
+    }
   }
 
   function handle(e){
@@ -142,11 +172,16 @@ const Overview = (props) => {
           style={{ width: 250 }}
          ></Input>
        </Form.Item>
-     
+       
        <Form.Item>
-        <Button type="primary" htmlType="submit">Add Site</Button> 
+         <Space>
+           <Button  style={{ width: 121 }} type="primary" htmlType="submit">Add Site</Button> 
+           <Button  onClick={()=> updateUserLink()} style={{ width: 121 }} type="primary">Update Site</Button> 
+         </Space>
        </Form.Item>
-
+       <Form.Item>
+         <Button onClick={()=> clearInput()} danger style={{ width: 250 }} type="dashed">Clear Input</Button>  
+       </Form.Item>
       </Form>  
       </Card>
 
@@ -173,8 +208,8 @@ const Overview = (props) => {
             iconTrash={<Trash size={20} strokeWidth={1} />}
             color={theme.darkColor}
             clickHandlerVist={() => window.open(userLink.siteUrl)}
-            clickHandlerEdit={() => console.log("edit")}
-            clickHandlerDelete={() => deleteUserLink(userLink.id)}
+            clickHandlerEdit={() => getUserLinkAndSetOnInput(userLink)}
+            clickHandlerDelete={() => deleteUserLink(userLink.id,userLink.siteName)}
            />
          </Col>
         )

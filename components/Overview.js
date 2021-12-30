@@ -3,9 +3,11 @@ import {
   Edit,
   MoreHorizontal,
   PhoneCall,
+  Trash2,
   Printer,
   Save,
   Trash,
+  Link,
   TrendingDown,
   TrendingUp
 } from 'react-feather';
@@ -85,10 +87,13 @@ const Overview = (props) => {
     Router.replace(Router.asPath);
   }
 
-  function postDelete(e){
-    Axios.delete(`http://localhost:8080/api/link/user/deleteUserLink/${id}`)
+  function deleteUserLink(linkId){
+    Axios.delete(`http://localhost:8080/api/link/user/deleteUserLink/${linkId}`)
     .then(res=>{
-      console.log("deleted", res.data).catch(err => console.log(err))
+      if(res.data !=null){
+         alert("site link deleted")
+      }
+      // console.log("deleted", res.data).catch(err => console.log(err))
     })
     Router.replace(Router.asPath);
   }
@@ -163,9 +168,13 @@ const Overview = (props) => {
             type="fill"
             siteName={userLink.siteName}
             siteUrl={userLink.siteUrl}
-            icon={<PhoneCall size={20} strokeWidth={1} />}
+            icon={<Link size={20} strokeWidth={1} />}
+            iconEdit={<Edit size={20} strokeWidth={1} />}
+            iconTrash={<Trash size={20} strokeWidth={1} />}
             color={theme.darkColor}
-            clickHandler={() => window.open(userLink.siteUrl)}
+            clickHandlerVist={() => window.open(userLink.siteUrl)}
+            clickHandlerEdit={() => console.log("edit")}
+            clickHandlerDelete={() => deleteUserLink(userLink.id)}
            />
          </Col>
         )

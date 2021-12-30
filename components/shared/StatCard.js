@@ -2,7 +2,7 @@ import { Button, Card, Col, Row } from 'antd';
 
 import PropTypes from 'prop-types';
 
-const StatCard = ({ type, siteUrl, siteName,icon, color, clickHandler }) => {
+const StatCard = ({ type, siteUrl, siteName,icon,iconEdit,iconTrash, color, clickHandlerVist,clickHandlerEdit,clickHandlerDelete }) => {
   let before = null,
     after = null;
 
@@ -14,14 +14,34 @@ const StatCard = ({ type, siteUrl, siteName,icon, color, clickHandler }) => {
         type="primary"
         style={{ backgroundColor: color, borderColor: color }}
         className={type !== 'fill' ? 'mr-4' : null}
-        onClick={clickHandler}
+        onClick={clickHandlerVist}
       >
         {icon}
+      </Button>
+      <Button
+        shape="circle"
+        size="large"
+        type="primary"
+        style={{ backgroundColor: color, borderColor: color }}
+        className={type !== 'fill' ? 'mr-4' : null}
+        onClick={clickHandlerEdit}
+      >
+        {iconEdit}
+      </Button>
+      <Button
+        shape="circle"
+        size="large"
+        type="primary"
+        style={{ backgroundColor: color, borderColor: color }}
+        className={type !== 'fill' ? 'mr-4' : null}
+        onClick={clickHandlerDelete}
+      >
+        {iconTrash}
       </Button>
     </Col>
   );
 
-  if (icon) {
+  if (icon||iconTrash||iconEdit) {
     type === 'fill' ? (after = cardIcon) : (before = cardIcon);
   }
 
